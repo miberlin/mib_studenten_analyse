@@ -7,4 +7,3 @@ ruamel.yaml
 streamlit
 watchdog
 scipy
-python-dotenv
