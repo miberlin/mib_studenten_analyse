@@ -1,0 +1,177 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# --- API configurations --------------------------------------------------------------------------
+api_url: https://api.airtable.com/v0/
+
+## --- API configurations --------------------------------------------------------------------------
+#databases:
+#  -
+
+# --- BASE Info ------------------------------------------------------------------------------------
+allgemeine_infos_base:
+  id: appkv778oY42bjmRo
+  studenten_table:
+    id: tblC37SpIM0F52lOD
+    name: Studenten Allgemein
+    fields:
+      - MiB-ID
+      - Vorname
+      - Nachname
+      - Handy
+      - Email
+      - Geschlecht
+      - Studiengang
+      - Uni
+      - Foto
+  themen_table:
+    id: tblDtrEbW3pUFNKcM
+    name: Themen
+  unimodule_table:
+    id: tblYHpeRlu13sLmkH
+    name: Uni-Module
+  team_table:
+    id: tblq5GvQ0DDy6FTW1
+    name: Team
+  studiengaenge_table:
+    id: tblY0CG06YLWr8Otu
+    name: Studiengänge
+  bezahltestunden_table:
+    id: tblAaFeUHX72Sql1m
+    name: Bezahlte Stunden
+
+
+test_ws2122_base:
+  id: appY8Qkyvpx0VTi8k
+  termine_table:
+    id: tblBW0J8i3k7gPBWd
+    name: Termine
+    fields:
+      - MiB-Kurse
+      - MiB-Kurs-Name
+      - Studenten x Termine
+      - Anwesenheit Rollup (from Studenten x Termine)
+      - Studentenanzahl (from Studenten x Termine)
+      - Aufmerksamkeit Mittel
+      - Verständnis Mittel
+      - Fun Mittel
+      - Datum-df
+      - Art des Termins
+    to_clean:
+      - MiB-Kurse
+      - MiB-Kurs-Name
+      - Studenten x Termine
+    clean_nan:
+      - Aufmerksamkeit Mittel
+      - Verständnis Mittel
+      - Fun Mittel
+
+  studentenxtermine_table:
+    id: tblN8cWYWl7Jhzag7
+    name: Studenten x Termine
+    fields:
+      - MiB-ID
+      - Termin
+      - Anwesenheit
+      - Aufmerksamkeit
+      - Verständnis
+      - Fun
+      - Zu spät?
+      - Datum-df
+      - MiB-Kurs-Name
+      - Art des Termin
+    to_clean:
+      - MiB-ID
+      - Termin
+      - Art des Termin
+    fill_nan:
+      - Anwesenheit
+      - Zu spät?
+  studenten_table:
+    id: tblAo05lyIWG1SBsD
+    name: Studenten
+    fields:
+      - Vorname
+      - Nachname
+      - Handy
+      - Email
+      - MiB-Kurse
+      - Uni-Module
+      - Studenten x Termine
+      - Uni
+      - Aufmerksamkeit Mittelwert
+      - Verständnis Mittelwert
+      - Fun Mittelwert
+      - Anwesenheit Quote #TODO: als Anwesenheitsquote unbenennen
+    to_clean:
+      - MiB-Kurse
+      - Uni-Module
+      - Studenten x Termine
+
+  pkergebnisse_table:
+    id: tblzhj6pmydnVBHvT
+    name: PK Ergebnisse
+    fields:
+      - PK-Name
+      - Datum-df
+      - MiB-ID
+      - MiB-Kurs-Name
+      - Erreicht Prozentual
+      - Geschätzt Prozentual
+    to_clean:
+      - MiB-ID
+      - Datum-df
+      - PK-Name
+      - MiB-Kurs-Name
+  probeklausuren_table:
+    id: tblJ9E8uFJ2BlCU1Y
+    name: Probeklausuren
+  themen_table:
+    id: tblybvdK0yLSyQAdu
+    name: Themen
+  mibkurse_table:
+    id: tblmcRXb36ule1ZqS
+    name: Mib-Kurse
+  unimodule_table:
+    id: tbl1EzxYFADbDT87m
+    name: Uni-Module
+  team_table:
+    id: tblGEMpY4RTpI6yiB
+    name: Team
+  studiengaenge_table:
+    id: tbl3H0lSAV6u8VW9T
+    name: Studiengänge
+
+# --- Data Visualization ------------------------------------------------------------------------------------
+plots:
+  students:
+    fields:
+      - MiB-ID
+      - MiB-Kurs-Name
+      - Anwesenheit
+      - Aufmerksamkeit
+      - Verständnis
+      - Fun
+      - Datum-df
+      - Zu spät?
+      - Art des Termin
+    pk_results:
+      - Erreicht Prozentual
+      - Geschätzt Prozentual
+      - MiB-ID
+      - PK-Name
+      - Datum-df
+      - MiB-Kurs-Name
+  kurse:
+    fields:
+      - MiB-Kurs-Name
+      - Art des Termins
+      - Anwesenheit Rollup (from Studenten x Termine)
+      - Studentenanzahl (from Studenten x Termine)
+      - Aufmerksamkeit Mittel
+      - Verständnis Mittel
+      - Fun Mittel
+      - Datum-df
+
+# --- Dashboard Setup ------------------------------------------------------------------------------------
+plot:

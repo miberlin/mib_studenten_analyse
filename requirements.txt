@@ -1,0 +1,10 @@
+numpy
+pandas
+matplotlib
+seaborn
+requests
+ruamel.yaml
+streamlit
+watchdog
+scipy
+python-dotenv
