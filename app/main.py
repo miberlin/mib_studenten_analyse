@@ -20,7 +20,7 @@ def main():
                     .css-qri22k .egzxvld0 {{
                         display: none !important;
                     }}
-                    .viewerBadge_container__1QSob {{
+                    .css-18ni7ap {{
                         display: none !important;
                     }}
                 </style>
