@@ -4,6 +4,20 @@ def main():
     # Them  config streamlit
     streamlit.set_page_config(layout='wide')
     set_page_container_style()
+    streamlit.markdown(
+        f'''
+                <style>
+                    .block-container {{
+                        padding-top: 0rem !important;
+                    }}
+                    .stApp {{
+                        color: black !important;
+                        background-color: white !important;
+                    }}
+                </style>
+                ''',
+        unsafe_allow_html=True,
+    )
     # read the configuration file and initialize random generators
     cfg = read_config('/app/mib_studenten_analyse/app/config/config.yaml')
 
