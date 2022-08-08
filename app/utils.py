@@ -202,7 +202,7 @@ def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
 
     # get plot with student info
     fig, ax = matplotlib.pyplot.subplots()
-    fig.set_size_inches(12, 8)
+    fig.set_size_inches(12, 6)
 
     # Plot options
     plot_options = student_plot_data_options(df,df_pk, cfg, student_id,start_date,end_date)
@@ -335,7 +335,7 @@ def plot_kurs_data(df, cfg, student_id,start_date,end_date):
         anw_checkbox = streamlit.checkbox('Anwesenheit', value=True)
 
         fig,ax = matplotlib.pyplot.subplots()
-        fig.set_size_inches(10,4)
+        fig.set_size_inches(16,8)
         # plot options
         values_range, anw_percent, aufm, vers, fun, dates = kurs_plot_data_options(df,cfg,student_id
                                                                                    ,start_date,end_date)
