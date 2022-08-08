@@ -1,5 +1,3 @@
-import streamlit
-
 from utils import *
 def main():
 

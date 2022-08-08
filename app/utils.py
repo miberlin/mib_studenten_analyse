@@ -389,7 +389,7 @@ def get_params(params_names_list):
 
 def set_page_container_style(
         max_width: int = 1100, max_width_100_percent: bool = False,
-        padding_top: int = 1, padding_right: int = 10, padding_left: int = 1, padding_bottom: int = 10
+        padding_top: int = 0, padding_right: int = 10, padding_left: int = 1, padding_bottom: int = 10
     ):
         if max_width_100_percent:
             max_width_str = f'max-width: 100%;'
