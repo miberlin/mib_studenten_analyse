@@ -3,7 +3,7 @@ import streamlit
 from utils import *
 def main():
     # read the configuration file and initialize random generators
-    cfg = read_config('/app/mib__analyse_app/app/config/config.yaml')
+    cfg = read_config('/app/mib_studenten_analyse/app/config/config.yaml')
 
     # read dataframes
     df_termine, df_studenten, df_studentenxtermine, df_pk_stud = generate_dataframes(cfg)
