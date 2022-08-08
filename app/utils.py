@@ -273,11 +273,11 @@ def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
 
     matplotlib.pyplot.legend(fontsize=14,loc='lower left')
     matplotlib.pyplot.title(f'Die Informationen über {student_id}', fontsize=14)
-    matplotlib.pyplot.xlabel('Datum', fontsize=14)
-    matplotlib.pyplot.ylabel('Prozent', fontsize=14)
+    # matplotlib.pyplot.xlabel('Datum', fontsize=14)
+    # matplotlib.pyplot.ylabel('Prozent', fontsize=14)
     matplotlib.pyplot.xticks(values_range,labels=dates, fontsize=14, rotation=45)
 
-    matplotlib.pyplot.yticks(100 * numpy.linspace(0, 1, 5), fontsize=14)
+    matplotlib.pyplot.yticks(100 * numpy.linspace(0, 1, 5), labels=["0 %",'25 %','50 %','75 %','100 %'], fontsize=14)
     matplotlib.pyplot.subplots_adjust(bottom=0.2)
     matplotlib.pyplot.grid(linewidth=.4)
     # matplotlib.pyplot.show()
