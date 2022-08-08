@@ -214,15 +214,15 @@ def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
 
     col1, col2, col3 = streamlit.columns(3)
     # Line selection using checkboxes
-    with col2:
+    with col1:
         aufm_checkbox = streamlit.checkbox('Aufmerksamkeit', value=True)
+        exams_checkbox = streamlit.checkbox('PK Ergebnisse', value=True)
+    with col2:
         vers_checkbox = streamlit.checkbox('Verständnis', value=True)
+        absent_checkbox = streamlit.checkbox('Anwesenheit', value=True)
     with col3:
         fun_checkbox = streamlit.checkbox('Fun Faktor', value=True)
-        absent_checkbox = streamlit.checkbox('Nicht anwesend', value=True)
-    with col4:
-        late_checkbox = streamlit.checkbox('Spät gekommen', value=True)
-        exams_checkbox = streamlit.checkbox('PK Ergebnisse', value=True)
+        late_checkbox = streamlit.checkbox('Verspätungen', value=True)
 
     plots_options_radio = "Normal"
     # with col4:
