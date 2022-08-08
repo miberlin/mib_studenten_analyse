@@ -23,6 +23,7 @@ def main():
     streamlit.write(kurs_id)
     # Select value range for courses
     streamlit.dataframe(all_dates_kurse['MiB-Kurs-Name'])
+    streamlit.write(type(kurs_id))
     course_dates = all_dates_kurse[all_dates_kurse['MiB-Kurs-Name'] == "Kurs Berlin"]
     course_dates = course_dates['Datum-df']
     min_date_kurs, max_date_kurs = min_max_dates(course_dates)
