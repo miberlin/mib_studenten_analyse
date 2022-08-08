@@ -206,7 +206,7 @@ def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
 
     # Plot options
     plot_options = student_plot_data_options(df,df_pk, cfg, student_id,start_date,end_date)
-    number_of_values, values_range, aufm, vers, fun, dates, late_arrival,nicht_dabei_idx, height, pk_idx, pk_actual_points,pk_guessed_points = plot_options
+    number_of_values, values_range, aufm, vers, fun, dates, late_arrival,nicht_dabei_idx, height, pk_idx, pk_actual_points ,pk_guessed_points = plot_options
     # fill missing values (nan) with mean
     missing_values_aufm = missing_values_plot(aufm)
     missing_values_vers = missing_values_plot(vers)
@@ -225,7 +225,7 @@ def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
         exams_checkbox = streamlit.checkbox('PK Ergebnisse', value=True)
     with col4:
         # Choose between interpolated or normal plots
-        plots_options_radio = streamlit.radio("TYp",("Normal", "Interpolated"))
+        plots_options_radio = streamlit.radio("typ",("Normal", "Interpolated"))
         # plots_options_calendar = streamlit.checkbox('Calendar view')
 
     # Selected lines to plot
