@@ -200,17 +200,6 @@ def student_plot_data_options(df,df_pk,cfg,student_id,start_date,end_date):
 def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
     # define columns in dashboard
 
-    # Line selection using checkboxes
-    aufm_checkbox = streamlit.checkbox('Aufmerksamkeit', value=True)
-    vers_checkbox = streamlit.checkbox('Verständnis', value=True)
-    fun_checkbox = streamlit.checkbox('Fun Faktor', value=True)
-    absent_checkbox = streamlit.checkbox('Nicht anwesend', value=True)
-    late_checkbox = streamlit.checkbox('Spät gekommen', value=True)
-    exams_checkbox = streamlit.checkbox('PK Ergebnisse', value=True)
-    # Choose between interpolated or normal plots
-    plots_options_radio = streamlit.radio("Typ von Plots", ("Normal", "Interpolated"))
-    #plots_options_calendar = streamlit.checkbox('Calendar view')
-
     # get plot with student info
     fig, ax = matplotlib.pyplot.subplots()
     fig.set_size_inches(12, 8)
@@ -222,6 +211,23 @@ def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
     missing_values_aufm = missing_values_plot(aufm)
     missing_values_vers = missing_values_plot(vers)
     missing_values_fun = missing_values_plot(fun)
+
+
+    col1, col2,  col3 = streamlit.columns(3)
+    # Line selection using checkboxes
+    with col1:
+        aufm_checkbox = streamlit.checkbox('Aufmerksamkeit', value=True)
+        vers_checkbox = streamlit.checkbox('Verständnis', value=True)
+        fun_checkbox = streamlit.checkbox('Fun Faktor', value=True)
+    with col2:
+        absent_checkbox = streamlit.checkbox('Nicht anwesend', value=True)
+        late_checkbox = streamlit.checkbox('Spät gekommen', value=True)
+        exams_checkbox = streamlit.checkbox('PK Ergebnisse', value=True)
+    with col3:
+        # Choose between interpolated or normal plots
+        plots_options_radio = streamlit.radio("Typ von Plots", ("Normal", "Interpolated"))
+        # plots_options_calendar = streamlit.checkbox('Calendar view')
+
     # Selected lines to plot
     if exams_checkbox:
         #ax.bar(pk_idx, numpy.ones(len(pk_idx)) * 100, color='white', edgecolor='green', zorder=-1)
@@ -275,6 +281,7 @@ def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
     # matplotlib.pyplot.show()
 
     streamlit.pyplot(fig)
+
 
 # Tables
 @streamlit.cache
