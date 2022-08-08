@@ -14,6 +14,15 @@ def main():
                         color: black !important;
                         background-color: white !important;
                     }}
+                    .css-18ni7ap .e8zbici2 {{
+                        display: none !important;
+                    }}
+                    .css-qri22k .egzxvld0 {{
+                        display: none !important;
+                    }}
+                    .viewerBadge_container__1QSob {{
+                        display: none !important;
+                    }}
                 </style>
                 ''',
         unsafe_allow_html=True,
