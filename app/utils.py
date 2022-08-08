@@ -226,7 +226,7 @@ def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
         exams_checkbox = streamlit.checkbox('PK Ergebnisse', value=True)
     with col4:
         # Choose between interpolated or normal plots
-        plots_options_radio = streamlit.radio(("TYp","Normal", "Interpolated"))
+        plots_options_radio = streamlit.radio("TYp",("Normal", "Interpolated"))
         # plots_options_calendar = streamlit.checkbox('Calendar view')
 
     # Selected lines to plot
