@@ -213,7 +213,7 @@ def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
     missing_values_fun = missing_values_plot(fun)
 
 
-    col1, col2, col3, col4 = streamlit.columns(3)
+    col1, col2, col3, col4 = streamlit.columns(4)
     # Line selection using checkboxes
     with col1:
         aufm_checkbox = streamlit.checkbox('Aufmerksamkeit', value=True)
