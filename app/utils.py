@@ -359,3 +359,23 @@ def plot_kurs_data(df, cfg, student_id,start_date,end_date):
         with col2:
             streamlit.pyplot(fig)
 
+
+# Used for the variables wich are going to be prefill using JS
+def get_param(param_name):
+    query_params = streamlit.experimental_get_query_params()
+    try:
+        return query_params[param_name][0]
+    except:
+        streamlit.write('Parameters is missing')
+        return False
+
+
+def get_params(params_names_list):
+    query_params = streamlit.experimental_get_query_params()
+    responses = []
+    for parameter in params_names_list:
+        try:
+            responses.append(query_params[parameter][0])
+        except Exception as e:
+            responses.append(None)
+    return responses

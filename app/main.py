@@ -25,13 +25,18 @@ def main():
 
     info_selection = streamlit.sidebar.radio("Wählt Info", ("Kurs Info", "Studenten Info"))
 
+    kurs_id = streamlit.text_input('Kurs', value=str(get_param('kurs_id')))
+    mib_id = streamlit.text_input('Student', value=str(get_param('mib_id')))
+    kurs_selectbox = kurs_id;
+
+
     # Decide which elements are going to be shown on the main page
     if info_selection == "Kurs Info":
-        # Courses page
-        streamlit.markdown("# Kurs data")
-
-        # Streamlit visual
-        streamlit.write(f'Hier sind die Infos zum {kurs_selectbox}')
+        # # Courses page
+        # streamlit.markdown("# Kurs data")
+        #
+        # # Streamlit visual
+        # streamlit.write(f'Hier sind die Infos zum {kurs_selectbox}')
 
         col_date_1, col_date_2 = streamlit.columns(2)
         with col_date_1:
@@ -47,10 +52,10 @@ def main():
         # Tables
 
     else:
-        streamlit.markdown("# Students data")
-
-        # Streamlit visual
-        streamlit.write(f'Hier stehen alle infos zu die Studenten aus dem {kurs_selectbox}')
+        # streamlit.markdown("# Students data")
+        #
+        # # Streamlit visual
+        # streamlit.write(f'Hier stehen alle infos zu die Studenten aus dem {kurs_selectbox}')
 
         # Student Info
         # Student dataframe
@@ -66,8 +71,8 @@ def main():
                                             max_value=max_date_kurs, value=max_date_kurs)
 
         # Student selection
-        students = streamlit.selectbox('Student ID', all_dates_students['MiB-ID'].unique())
-        mib_id = students
+        # students = streamlit.selectbox('Student ID', all_dates_students['MiB-ID'].unique())
+        # mib_id = students
         plot_student_data(df_studentenxtermine,df_pk_stud, cfg, mib_id, start_date, end_date)
 
         # Styling
