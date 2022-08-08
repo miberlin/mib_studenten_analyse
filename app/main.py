@@ -16,7 +16,7 @@ def main():
     all_courses_names = df_termine['MiB-Kurs-Name'].unique()
 
     # Studenten ID
-    mib_id = streamlit.text_input('Student', value=str(get_param('mib_id')))
+    mib_id = str(get_param('mib_id')) #streamlit.text_input('Student', value=str(get_param('mib_id')))
 
     # Options to select o sidebar
     kurs_id = df_studentenxtermine[df_studentenxtermine['MiB-ID']==mib_id]['MiB-Kurs-Name']
