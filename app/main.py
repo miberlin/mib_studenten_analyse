@@ -3,27 +3,8 @@ def main():
 
     # Them  config streamlit
     streamlit.set_page_config(layout='wide')
-    # set_page_container_style()
-    streamlit.markdown(
-        f'''
-                <style>
-                    .block-container {{
-                        padding-top: 0rem !important;
-                    }}
-                    .stApp {{
-                        color: black !important;
-                        background-color: white !important;
-                    }}
-                    .css-qri22k {{
-                        display: none !important;
-                    }}
-                    .css-18ni7ap {{
-                        display: none !important;
-                    }}
-                </style>
-                ''',
-        unsafe_allow_html=True,
-    )
+    set_page_container_style()
+
     # read the configuration file and initialize random generators
     cfg = read_config('/app/mib_studenten_analyse/app/config/config.yaml')
 
