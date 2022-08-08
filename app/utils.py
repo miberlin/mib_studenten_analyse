@@ -212,15 +212,15 @@ def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
     missing_values_vers = missing_values_plot(vers)
     missing_values_fun = missing_values_plot(fun)
 
-    col1, col2, col3 = streamlit.columns(3)
+    col1, col2, col3, col4, col5 = streamlit.columns((1,2,2,2,1))
     # Line selection using checkboxes
-    with col1:
+    with col2:
         aufm_checkbox = streamlit.checkbox('Aufmerksamkeit', value=True)
         vers_checkbox = streamlit.checkbox('Verständnis', value=True)
-    with col2:
+    with col3:
         fun_checkbox = streamlit.checkbox('Fun Faktor', value=True)
         absent_checkbox = streamlit.checkbox('Nicht anwesend', value=True)
-    with col3:
+    with col4:
         late_checkbox = streamlit.checkbox('Spät gekommen', value=True)
         exams_checkbox = streamlit.checkbox('PK Ergebnisse', value=True)
 
