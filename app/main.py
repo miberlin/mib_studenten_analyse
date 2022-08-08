@@ -3,7 +3,7 @@ def main():
 
     # Them  config streamlit
     streamlit.set_page_config(layout='wide')
-    set_page_container_style()
+    # set_page_container_style()
     streamlit.markdown(
         f'''
                 <style>
