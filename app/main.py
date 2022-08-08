@@ -5,11 +5,7 @@ def main():
 
     # Them  config streamlit
     streamlit.set_page_config(layout='wide',
-                                  menu_items={
-                                      'Get Help': None,
-                                      'Report a bug': None,
-                                      'About': None
-                                  }
+                                  menu_items={}
                               )
     # read the configuration file and initialize random generators
     cfg = read_config('/app/mib_studenten_analyse/app/config/config.yaml')
