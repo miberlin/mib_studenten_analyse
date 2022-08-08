@@ -274,7 +274,7 @@ def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
         matplotlib.pyplot.yticks(100 * numpy.linspace(0, 1, 5), fontsize=14)
         matplotlib.pyplot.subplots_adjust(bottom=0.2)
         matplotlib.pyplot.grid(linewidth=.4)
-        streamlit.write(values_range)
+        #streamlit.write(values_range)
         # matplotlib.pyplot.show()
 
     with col2:
