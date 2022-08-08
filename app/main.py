@@ -14,10 +14,7 @@ def main():
                         color: black !important;
                         background-color: white !important;
                     }}
-                    .css-18ni7ap .e8zbici2 {{
-                        display: none !important;
-                    }}
-                    .css-qri22k .egzxvld0 {{
+                    .css-qri22k {{
                         display: none !important;
                     }}
                     .css-18ni7ap {{
