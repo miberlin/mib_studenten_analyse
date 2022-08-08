@@ -218,14 +218,15 @@ def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
     with col1:
         aufm_checkbox = streamlit.checkbox('Aufmerksamkeit', value=True)
         vers_checkbox = streamlit.checkbox('Verständnis', value=True)
-        fun_checkbox = streamlit.checkbox('Fun Faktor', value=True)
     with col2:
+        fun_checkbox = streamlit.checkbox('Fun Faktor', value=True)
         absent_checkbox = streamlit.checkbox('Nicht anwesend', value=True)
+    with col3:
         late_checkbox = streamlit.checkbox('Spät gekommen', value=True)
         exams_checkbox = streamlit.checkbox('PK Ergebnisse', value=True)
-    with col3:
+    with col4:
         # Choose between interpolated or normal plots
-        plots_options_radio = streamlit.radio("Typ", ("Normal", "Interpolated"))
+        plots_options_radio = streamlit.radio(("Normal", "Interpolated"))
         # plots_options_calendar = streamlit.checkbox('Calendar view')
 
     # Selected lines to plot
