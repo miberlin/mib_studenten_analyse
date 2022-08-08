@@ -335,7 +335,7 @@ def plot_kurs_data(df, cfg, student_id,start_date,end_date):
         anw_checkbox = streamlit.checkbox('Anwesenheit', value=True)
 
         fig,ax = matplotlib.pyplot.subplots()
-        fig.set_size_inches(16,8)
+        fig.set_size_inches(16,6)
         # plot options
         values_range, anw_percent, aufm, vers, fun, dates = kurs_plot_data_options(df,cfg,student_id
                                                                                    ,start_date,end_date)
