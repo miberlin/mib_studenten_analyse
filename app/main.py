@@ -12,9 +12,6 @@ def main():
     # Kurs dataframe
     all_dates_kurse = df_termine[cfg['plots']['kurse']['fields']]
 
-    # All courses
-    all_courses_names = df_termine['MiB-Kurs-Name'].unique()
-
     # Studenten ID
     mib_id = str(get_param('mib_id')) #streamlit.text_input('Student', value=str(get_param('mib_id')))
 
