@@ -199,85 +199,82 @@ def student_plot_data_options(df,df_pk,cfg,student_id,start_date,end_date):
 
 def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
     # define columns in dashboard
-    col1, col2 = streamlit.columns((1.5, 5))
 
     # Line selection using checkboxes
-    with col1:
-        aufm_checkbox = streamlit.checkbox('Aufmerksamkeit', value=True)
-        vers_checkbox = streamlit.checkbox('Verständnis', value=True)
-        fun_checkbox = streamlit.checkbox('Fun Faktor', value=True)
-        absent_checkbox = streamlit.checkbox('Nicht anwesend', value=True)
-        late_checkbox = streamlit.checkbox('Spät gekommen', value=True)
-        exams_checkbox = streamlit.checkbox('PK Ergebnisse', value=True)
-        # Choose between interpolated or normal plots
-        plots_options_radio = streamlit.radio("Typ von Plots", ("Normal", "Interpolated"))
-        #plots_options_calendar = streamlit.checkbox('Calendar view')
+    aufm_checkbox = streamlit.checkbox('Aufmerksamkeit', value=True)
+    vers_checkbox = streamlit.checkbox('Verständnis', value=True)
+    fun_checkbox = streamlit.checkbox('Fun Faktor', value=True)
+    absent_checkbox = streamlit.checkbox('Nicht anwesend', value=True)
+    late_checkbox = streamlit.checkbox('Spät gekommen', value=True)
+    exams_checkbox = streamlit.checkbox('PK Ergebnisse', value=True)
+    # Choose between interpolated or normal plots
+    plots_options_radio = streamlit.radio("Typ von Plots", ("Normal", "Interpolated"))
+    #plots_options_calendar = streamlit.checkbox('Calendar view')
 
-        # get plot with student info
-        fig, ax = matplotlib.pyplot.subplots()
-        fig.set_size_inches(12, 8)
+    # get plot with student info
+    fig, ax = matplotlib.pyplot.subplots()
+    fig.set_size_inches(12, 8)
 
-        # Plot options
-        plot_options = student_plot_data_options(df,df_pk, cfg, student_id,start_date,end_date)
-        number_of_values, values_range, aufm, vers, fun, dates, late_arrival,nicht_dabei_idx, height, pk_idx, pk_actual_points,pk_guessed_points = plot_options
-        # fill missing values (nan) with mean
-        missing_values_aufm = missing_values_plot(aufm)
-        missing_values_vers = missing_values_plot(vers)
-        missing_values_fun = missing_values_plot(fun)
-        # Selected lines to plot
-        if exams_checkbox:
-            #ax.bar(pk_idx, numpy.ones(len(pk_idx)) * 100, color='white', edgecolor='green', zorder=-1)
-            ax.bar(pk_idx, pk_actual_points,width=0.6,alpha=.7,color='aqua',label='Erreichte Punkte')#, zorder=-1)
-            ax.bar(pk_idx, pk_guessed_points,width=0.6,alpha=0.7 ,fill=False,hatch='\\\\',label='Geschätzte Punkte')#, zorder=-1)  # '..'
-        if absent_checkbox:
-            ax.bar(nicht_dabei_idx, height, alpha=1, color='white', width=1)
-            ax.bar(nicht_dabei_idx, height, alpha=.2, color='red', width=1,label='Nicht anwesend')
-        if aufm_checkbox:
-            if plots_options_radio == "Interpolated":
-                x_aufm_ip, y_aufm_ip = interpolation_values(number_of_values, aufm)
-                ax.plot(x_aufm_ip, 100 * y_aufm_ip,color='orange', linewidth=4,
-                                       label='Aufmerksamkeit interpolated', linestyle='-.', zorder=-1)
-            else:
-                ax.plot(values_range, 100 * aufm, linewidth=4,
-                                       label='Aufmerksamkeit', linestyle='-', color='orange', zorder=-1)
-                ax.plot(values_range, 100 * missing_values_aufm, linewidth=4,
-                        linestyle=':', color='orange', zorder=1)
-        if vers_checkbox:
-            if plots_options_radio == "Interpolated":
-                x_vers_ip, y_vers_ip = interpolation_values(number_of_values, vers)
-                ax.plot(x_vers_ip, 100 * y_vers_ip, color='green', linewidth=4,
-                                       label='Verständnis interpolated', linestyle='-.', zorder=-1)
-            else:
-                ax.plot(values_range, 100 * vers, linewidth=4,
-                                       label='Verständnis', linestyle='-', color='green', zorder=-1)
-                ax.plot(values_range, 100 * missing_values_vers, linewidth=4,
-                        linestyle=':', color='green', zorder=1)
-        if fun_checkbox:
-            if plots_options_radio == "Interpolated":
-                x_fun_ip, y_fun_ip = interpolation_values(number_of_values, fun)
-                ax.plot(x_fun_ip, 100 * y_fun_ip, 'k-.', linewidth=4,
-                                       label='Fun interpolated', linestyle='-.', zorder=-1)
-            else:
-                ax.plot(values_range, 100 * fun, linewidth=4,
-                                       label='Fun', linestyle='-', color='blue', zorder=-1)
-                ax.plot(values_range, 100 * missing_values_fun, linewidth=4,
-                        linestyle=':', color='blue', zorder=1)
-        if late_checkbox:
-            ax.vlines(x=late_arrival,ymin=0,ymax=100, color='red', label='Zu spät',linestyles='-.')
+    # Plot options
+    plot_options = student_plot_data_options(df,df_pk, cfg, student_id,start_date,end_date)
+    number_of_values, values_range, aufm, vers, fun, dates, late_arrival,nicht_dabei_idx, height, pk_idx, pk_actual_points,pk_guessed_points = plot_options
+    # fill missing values (nan) with mean
+    missing_values_aufm = missing_values_plot(aufm)
+    missing_values_vers = missing_values_plot(vers)
+    missing_values_fun = missing_values_plot(fun)
+    # Selected lines to plot
+    if exams_checkbox:
+        #ax.bar(pk_idx, numpy.ones(len(pk_idx)) * 100, color='white', edgecolor='green', zorder=-1)
+        ax.bar(pk_idx, pk_actual_points,width=0.6,alpha=.7,color='aqua',label='Erreichte Punkte')#, zorder=-1)
+        ax.bar(pk_idx, pk_guessed_points,width=0.6,alpha=0.7 ,fill=False,hatch='\\\\',label='Geschätzte Punkte')#, zorder=-1)  # '..'
+    if absent_checkbox:
+        ax.bar(nicht_dabei_idx, height, alpha=1, color='white', width=1)
+        ax.bar(nicht_dabei_idx, height, alpha=.2, color='red', width=1,label='Nicht anwesend')
+    if aufm_checkbox:
+        if plots_options_radio == "Interpolated":
+            x_aufm_ip, y_aufm_ip = interpolation_values(number_of_values, aufm)
+            ax.plot(x_aufm_ip, 100 * y_aufm_ip,color='orange', linewidth=4,
+                                   label='Aufmerksamkeit interpolated', linestyle='-.', zorder=-1)
+        else:
+            ax.plot(values_range, 100 * aufm, linewidth=4,
+                                   label='Aufmerksamkeit', linestyle='-', color='orange', zorder=-1)
+            ax.plot(values_range, 100 * missing_values_aufm, linewidth=4,
+                    linestyle=':', color='orange', zorder=1)
+    if vers_checkbox:
+        if plots_options_radio == "Interpolated":
+            x_vers_ip, y_vers_ip = interpolation_values(number_of_values, vers)
+            ax.plot(x_vers_ip, 100 * y_vers_ip, color='green', linewidth=4,
+                                   label='Verständnis interpolated', linestyle='-.', zorder=-1)
+        else:
+            ax.plot(values_range, 100 * vers, linewidth=4,
+                                   label='Verständnis', linestyle='-', color='green', zorder=-1)
+            ax.plot(values_range, 100 * missing_values_vers, linewidth=4,
+                    linestyle=':', color='green', zorder=1)
+    if fun_checkbox:
+        if plots_options_radio == "Interpolated":
+            x_fun_ip, y_fun_ip = interpolation_values(number_of_values, fun)
+            ax.plot(x_fun_ip, 100 * y_fun_ip, 'k-.', linewidth=4,
+                                   label='Fun interpolated', linestyle='-.', zorder=-1)
+        else:
+            ax.plot(values_range, 100 * fun, linewidth=4,
+                                   label='Fun', linestyle='-', color='blue', zorder=-1)
+            ax.plot(values_range, 100 * missing_values_fun, linewidth=4,
+                    linestyle=':', color='blue', zorder=1)
+    if late_checkbox:
+        ax.vlines(x=late_arrival,ymin=0,ymax=100, color='red', label='Zu spät',linestyles='-.')
 
-        matplotlib.pyplot.legend(fontsize=14,loc='lower left')
-        matplotlib.pyplot.title(f'Die Informationen über {student_id}', fontsize=14)
-        matplotlib.pyplot.xlabel('Datum', fontsize=14)
-        matplotlib.pyplot.ylabel('Prozent', fontsize=14)
-        matplotlib.pyplot.xticks(values_range,labels=dates, fontsize=14, rotation=45)
+    matplotlib.pyplot.legend(fontsize=14,loc='lower left')
+    matplotlib.pyplot.title(f'Die Informationen über {student_id}', fontsize=14)
+    matplotlib.pyplot.xlabel('Datum', fontsize=14)
+    matplotlib.pyplot.ylabel('Prozent', fontsize=14)
+    matplotlib.pyplot.xticks(values_range,labels=dates, fontsize=14, rotation=45)
 
-        matplotlib.pyplot.yticks(100 * numpy.linspace(0, 1, 5), fontsize=14)
-        matplotlib.pyplot.subplots_adjust(bottom=0.2)
-        matplotlib.pyplot.grid(linewidth=.4)
-        # matplotlib.pyplot.show()
+    matplotlib.pyplot.yticks(100 * numpy.linspace(0, 1, 5), fontsize=14)
+    matplotlib.pyplot.subplots_adjust(bottom=0.2)
+    matplotlib.pyplot.grid(linewidth=.4)
+    # matplotlib.pyplot.show()
 
-    with col2:
-        streamlit.pyplot(fig)
+    streamlit.pyplot(fig)
 
 # Tables
 @streamlit.cache
