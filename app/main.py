@@ -21,10 +21,8 @@ def main():
     # Options to select o sidebar
     kurs_id = df_studentenxtermine[df_studentenxtermine['MiB-ID']==mib_id]['MiB-Kurs-Name']
     kurs_id = kurs_id.unique()
-    streamlit.write(kurs_id)
+
     # Select value range for courses
-    streamlit.dataframe(all_dates_kurse['MiB-Kurs-Name'])
-    streamlit.write(type(kurs_id[0]))
     course_dates = all_dates_kurse[all_dates_kurse['MiB-Kurs-Name'] == kurs_id.any()]
     course_dates = course_dates['Datum-df']
     min_date_kurs, max_date_kurs = min_max_dates(course_dates)
