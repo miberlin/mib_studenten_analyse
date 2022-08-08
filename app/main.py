@@ -19,7 +19,8 @@ def main():
     mib_id = streamlit.text_input('Student', value=str(get_param('mib_id')))
 
     # Options to select o sidebar
-    kurs_id = df_studentenxtermine[df_studentenxtermine['MiB-ID']==mib_id]['MiB-Kurs-Name'].unique()
+    kurs_id = df_studentenxtermine[df_studentenxtermine['MiB-ID']==mib_id]['MiB-Kurs-Name']
+    kurs_id = kurs_id.unique()
     streamlit.write(kurs_id)
     # Select value range for courses
     streamlit.dataframe(all_dates_kurse['MiB-Kurs-Name'])
