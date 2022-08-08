@@ -276,7 +276,6 @@ def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
     # matplotlib.pyplot.xlabel('Datum', fontsize=14)
     # matplotlib.pyplot.ylabel('Prozent', fontsize=14)
     matplotlib.pyplot.xticks(values_range,labels=dates, fontsize=14, rotation=45)
-
     matplotlib.pyplot.yticks(100 * numpy.linspace(0, 1, 5), labels=["0 %",'25 %','50 %','75 %','100 %'], fontsize=14)
     matplotlib.pyplot.subplots_adjust(bottom=0.2)
     matplotlib.pyplot.grid(linewidth=.4)
@@ -385,3 +384,35 @@ def get_params(params_names_list):
         except Exception as e:
             responses.append(None)
     return responses
+
+# Page style
+
+def set_page_container_style(
+        max_width: int = 1100, max_width_100_percent: bool = False,
+        padding_top: int = 1, padding_right: int = 10, padding_left: int = 1, padding_bottom: int = 10
+    ):
+        if max_width_100_percent:
+            max_width_str = f'max-width: 100%;'
+        else:
+            max_width_str = f'max-width: {max_width}px;'
+        streamlit.markdown(
+            f'''
+            <style>
+                .reportview-container .sidebar-content {{
+                    padding-top: {padding_top}rem;
+                }}
+                .reportview-container .main .block-container {{
+                    {max_width_str}
+                    padding-top: {padding_top}rem;
+                    padding-right: {padding_right}rem;
+                    padding-left: {padding_left}rem;
+                    padding-bottom: {padding_bottom}rem;
+                }}
+                .reportview-container .main {{
+                    color: black;
+                    background-color: white;
+                }}
+            </style>
+            ''',
+            unsafe_allow_html=True,
+        )
