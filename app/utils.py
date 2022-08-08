@@ -223,6 +223,8 @@ def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
     with col3:
         late_checkbox = streamlit.checkbox('Spät gekommen', value=True)
         exams_checkbox = streamlit.checkbox('PK Ergebnisse', value=True)
+
+    plots_options_radio = "Normal"
     # with col4:
     #     # Choose between interpolated or normal plots
     #     plots_options_radio = streamlit.radio(options = ("Normal", "Interpolated"))
