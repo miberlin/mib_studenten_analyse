@@ -20,9 +20,6 @@ def main():
                     .css-18ni7ap {{
                         display: none !important;
                     }}
-                    .viewerBadge_container__1QSob {{
-                        display: none !important;
-                    }}
                 </style>
                 ''',
         unsafe_allow_html=True,
