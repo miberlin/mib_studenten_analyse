@@ -390,21 +390,21 @@ def get_params(params_names_list):
 def set_page_container_style():
     streamlit.markdown(
         f'''
-                    <style>
-                        .block-container {{
-                            padding-top: 0rem !important;
-                        }}
-                        .stApp {{
-                            color: black !important;
-                            background-color: white !important;
-                        }}
-                        .css-qri22k {{
-                            display: none !important;
-                        }}
-                        .css-18ni7ap {{
-                            display: none !important;
-                        }}
-                    </style>
-                    ''',
+            <style>
+                .block-container {{
+                    padding-top: 0rem !important;
+                }}
+                .stApp {{
+                    color: black !important;
+                    background-color: white !important;
+                }}
+                .css-qri22k {{
+                    display: none !important;
+                }}
+                .css-18ni7ap {{
+                    display: none !important;
+                }}
+            </style>
+            ''',
         unsafe_allow_html=True,
     )
