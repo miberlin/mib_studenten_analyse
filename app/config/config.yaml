@@ -52,9 +52,9 @@ test_ws2122_base:
       - Studenten x Termine
       - Anwesenheit (from Studenten x Termine)
       - Studentenanzahl (from Studenten x Termine)
-      - Aufmerksamkeit Mittel
-      - Verständnis Mittel
-      - Fun Mittel
+      - Aufmerksamkeit Mittel Prozentual
+      - Verständnis Mittel Prozentual
+      - Fun Mittel Prozentual
       - Datum-df
       - Art des Termins
     to_clean:
