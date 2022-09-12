@@ -1,4 +1,6 @@
 from utils import *
+
+
 def main():
 
     # Them  config streamlit
@@ -16,10 +18,10 @@ def main():
     all_dates_kurse = df_termine[cfg['plots']['kurse']['fields']]
 
     # Studenten ID
-    mib_id = str(get_param('mib_id')) #streamlit.text_input('Student', value=str(get_param('mib_id')))
+    mib_id = str(get_param('mib_id'))
 
     # Options to select o sidebar
-    kurs_id = df_studentenxtermine[df_studentenxtermine['MiB-ID']==mib_id]['MiB-Kurs-Name']
+    kurs_id = df_studentenxtermine[df_studentenxtermine['MiB-ID'] == mib_id]['MiB-Kurs-Name']
     kurs_id = kurs_id.unique()
 
     # Select value range for courses

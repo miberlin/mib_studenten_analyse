@@ -8,7 +8,6 @@ import matplotlib.pyplot
 import streamlit
 from scipy.interpolate import interp1d
 from datetime import datetime
-import os
 
 
 AIRTABLE_API_KEY = streamlit.secrets['AIRTABLE_API_KEY']
@@ -155,16 +154,16 @@ def missing_values_plot(df):
 # For dates: Dates always have to be imported sorted.
 # Merge different courses
 @streamlit.cache
-def student_plot_data_options(df,df_pk,cfg,student_id,start_date,end_date):
+def student_plot_data_options(df, df_pk, cfg, student_id, start_date, end_date):
     # Student data
     student_data = df[cfg['plots']['students']['fields']]
 
     # Student data for exam results
     pk_results_data = df_pk[cfg['plots']['students']['pk_results']]
 
-    all_data = pandas.concat([student_data,pk_results_data])
+    all_data = pandas.concat([student_data, pk_results_data])
     all_data['Art des Termin'] = all_data['Art des Termin'].fillna('PK')
-    values_name = all_data[all_data['MiB-ID']==student_id]
+    values_name = all_data[all_data['MiB-ID'] == student_id]
     values_name['Datum-df'] = pandas.to_datetime(values_name['Datum-df'], format='%d/%m/%y')
     values_name.sort_values(by='Datum-df', inplace=True)
     values_name['Datum-df'] = values_name['Datum-df'].dt.date
@@ -190,14 +189,13 @@ def student_plot_data_options(df,df_pk,cfg,student_id,start_date,end_date):
 
     pk_idx = numpy.array(values_name['Art des Termin'])
     pk_idx = numpy.argwhere(pk_idx == 'PK').flatten()
-    #pk_results = values_name[pk_idx]
     pk_actual_points = values_name['Erreicht Prozentual'].dropna() * 100
     pk_guessed_points = values_name['Geschätzt Prozentual'].dropna() * 100
 
-    return number_of_values, values_range, aufm, vers, fun, date, late_arrival, nicht_dabei_idx, height, pk_idx, pk_actual_points,pk_guessed_points
+    return number_of_values, values_range, aufm, vers, fun, date, late_arrival, nicht_dabei_idx, height, pk_idx, pk_actual_points, pk_guessed_points
 
 
-def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
+def plot_student_data(df, df_pk, cfg, student_id, start_date, end_date):
     # define columns in dashboard
 
     # get plot with student info
@@ -205,8 +203,8 @@ def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
     fig.set_size_inches(12, 6)
 
     # Plot options
-    plot_options = student_plot_data_options(df,df_pk, cfg, student_id,start_date,end_date)
-    number_of_values, values_range, aufm, vers, fun, dates, late_arrival,nicht_dabei_idx, height, pk_idx, pk_actual_points ,pk_guessed_points = plot_options
+    plot_options = student_plot_data_options(df, df_pk, cfg, student_id, start_date, end_date)
+    number_of_values, values_range, aufm, vers, fun, dates, late_arrival, nicht_dabei_idx, height, pk_idx, pk_actual_points ,pk_guessed_points = plot_options
     # fill missing values (nan) with mean
     missing_values_aufm = missing_values_plot(aufm)
     missing_values_vers = missing_values_plot(vers)
@@ -225,16 +223,11 @@ def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
         late_checkbox = streamlit.checkbox('Verspätungen', value=True)
 
     plots_options_radio = "Normal"
-    # with col4:
-    #     # Choose between interpolated or normal plots
-    #     plots_options_radio = streamlit.radio(options = ("Normal", "Interpolated"))
-    #     # plots_options_calendar = streamlit.checkbox('Calendar view')
 
     # Selected lines to plot
     if exams_checkbox:
-        #ax.bar(pk_idx, numpy.ones(len(pk_idx)) * 100, color='white', edgecolor='green', zorder=-1)
-        ax.bar(pk_idx, pk_actual_points,width=0.6,alpha=.7,color='aqua',label='Erreichte Punkte')#, zorder=-1)
-        ax.bar(pk_idx, pk_guessed_points,width=0.6,alpha=0.7 ,fill=False,hatch='\\\\',label='Geschätzte Punkte')#, zorder=-1)  # '..'
+        ax.bar(pk_idx, pk_actual_points,width=0.6,alpha=.7,color='aqua',label='Erreichte Punkte')
+        ax.bar(pk_idx, pk_guessed_points,width=0.6,alpha=0.7 ,fill=False,hatch='\\\\',label='Geschätzte Punkte')
     if absent_checkbox:
         ax.bar(nicht_dabei_idx, height, alpha=1, color='white', width=1)
         ax.bar(nicht_dabei_idx, height, alpha=.2, color='red', width=1,label='Nicht anwesend')
@@ -279,93 +272,10 @@ def plot_student_data(df,df_pk, cfg, student_id, start_date, end_date):
     matplotlib.pyplot.yticks(100 * numpy.linspace(0, 1, 5), labels=["0 %",'25 %','50 %','75 %','100 %'], fontsize=10)
     matplotlib.pyplot.subplots_adjust(bottom=0.2)
     matplotlib.pyplot.grid(linewidth=.4)
-    # matplotlib.pyplot.show()
-
     streamlit.pyplot(fig)
 
 
-# Tables
-@streamlit.cache
-def student_data_table(df, id, start_date, end_date):
-    student_data = df[df['MiB-ID'] == id].drop(columns=['MiB-ID'])
-    dates = student_data['Datum-df']
-    dates = pandas.to_datetime(dates, format='%d/%m/%y')
-    dates = dates.dt.date.sort_values()
-    dates = dates.loc[(start_date <= dates) & (end_date >= dates)]
-    dates = pandas.to_datetime(dates)
-    dates = dates.dt.strftime('%d/%m/%y')
-    student_data = student_data.loc[student_data['Datum-df'].isin(dates)]
-    student_data = student_data.set_index('Datum-df')
-    return student_data
-
-
-@streamlit.cache
-def kurs_plot_data_options(df,cfg,student_id,start_date,end_date):
-    kurs_data = df[cfg['plots']['kurse']['fields']]
-    values_name = kurs_data[kurs_data['MiB-Kurs-Name'] == student_id]
-    dates = values_name['Datum-df']
-    dates = pandas.to_datetime(dates, format='%d/%m/%y')
-    dates = dates.dt.date.sort_values()
-    dates = dates.loc[(start_date <= dates) & (end_date >= dates)]
-    dates = pandas.to_datetime(dates)
-    dates = dates.dt.strftime('%d/%m/%y')
-    values_name = values_name.loc[values_name['Datum-df'].isin(dates)]
-    number_of_values = values_name.shape[0]
-    values_range = numpy.linspace(0, number_of_values - 1, num=number_of_values)
-    anw = values_name['Anwesenheit Rollup (from Studenten x Termine)']
-    total_students = values_name['Studentenanzahl (from Studenten x Termine)']
-    anw_percent = anw / total_students
-    aufm = values_name['Aufmerksamkeit Mittel'] / (numpy.ones(number_of_values) * 5)
-    vers = values_name['Verständnis Mittel'] / (numpy.ones(number_of_values) * 5)
-    fun = values_name['Fun Mittel'] / (numpy.ones(number_of_values) * 10)
-    return values_range, anw_percent, aufm, vers, fun, dates
-
-
-def plot_kurs_data(df, cfg, student_id,start_date,end_date):
-
-    # define columns in dashboard
-    col1, col2 = streamlit.columns((1.5, 5))
-
-    # Line selection using checkboxes
-    with col1:
-        aufm_checkbox = streamlit.checkbox('Aufmerksamkeit', value=True)
-        vers_checkbox = streamlit.checkbox('Verständnis', value=True)
-        fun_checkbox = streamlit.checkbox('Fun Faktor', value=True)
-        anw_checkbox = streamlit.checkbox('Anwesenheit', value=True)
-
-        fig,ax = matplotlib.pyplot.subplots()
-        fig.set_size_inches(16,8)
-        # plot options
-        values_range, anw_percent, aufm, vers, fun, dates = kurs_plot_data_options(df,cfg,student_id
-                                                                                   ,start_date,end_date)
-        if aufm_checkbox:
-            ax.plot(values_range,100*aufm,label='Aufmerksamkeit',linewidth=4,
-                    linestyle='-',color='orange',zorder=-1)
-        if vers_checkbox:
-            ax.plot(values_range,100*vers,label='Verständnis',linewidth=4,
-                    linestyle='-',color='green',zorder=-1)
-        if fun_checkbox:
-            ax.plot(values_range,100*fun,label='Fun',linewidth=4,
-                    linestyle='-',color='blue',zorder=-1)
-        if anw_checkbox:
-            ax.plot(values_range,100*anw_percent,label='Anwesenheit',linewidth=4,
-                    linestyle='--',color='black')
-
-        matplotlib.pyplot.legend(fontsize=14)
-        matplotlib.pyplot.title(f'Die Informationen über {student_id}',fontsize=14)
-        matplotlib.pyplot.xlabel('Datum',fontsize=14)
-        matplotlib.pyplot.ylabel('Prozent',fontsize=14)
-        matplotlib.pyplot.xticks(values_range,labels=dates,fontsize=14,rotation=45)
-        matplotlib.pyplot.yticks(100*numpy.linspace(0,1,11),fontsize=14)
-        matplotlib.pyplot.grid(linewidth=.4)
-        # matplotlib.pyplot.show()
-
-        # Show figure in Dashboard
-        with col2:
-            streamlit.pyplot(fig)
-
-
-# Used for the variables wich are going to be prefill using JS
+# Used for the variables wich are going to be prefilled using JS
 def get_param(param_name):
     query_params = streamlit.experimental_get_query_params()
     try:
@@ -385,8 +295,8 @@ def get_params(params_names_list):
             responses.append(None)
     return responses
 
-# Page style
 
+# Page style
 def set_page_container_style():
     streamlit.markdown(
         f'''

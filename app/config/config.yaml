@@ -99,10 +99,10 @@ test_ws2122_base:
       - Uni-Module
       - Studenten x Termine
       - Uni
-      - Aufmerksamkeit Mittelwert
-      - Verständnis Mittelwert
-      - Fun Mittelwert
-      - Anwesenheit Quote #TODO: als Anwesenheitsquote unbenennen
+      - Aufmerksamkeit Mittel Prozentual
+      - Verständnis Mittel Prozentual
+      - Fun Mittel Prozentual
+      - Anwesenheitsquote
     to_clean:
       - MiB-Kurse
       - Uni-Module
