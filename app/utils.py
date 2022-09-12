@@ -134,7 +134,6 @@ def min_max_dates(df):
     dates = df.unique()
     dates = pandas.to_datetime(dates, format='%d/%m/%y').sort_values()
     dates = dates.strftime('%d/%m/%y')
-    streamlit.dataframe(df)
     min_date = dates[0]
     max_date = dates[-1]
     min_date = datetime.strptime(min_date, '%d/%m/%y')
