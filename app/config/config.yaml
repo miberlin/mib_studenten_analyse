@@ -62,9 +62,9 @@ test_ws2122_base:
       - MiB-Kurs-Name
       - Studenten x Termine
     clean_nan:
-      - Aufmerksamkeit Mittel
-      - Verständnis Mittel
-      - Fun Mittel
+      - Aufmerksamkeit Mittel Prozentual
+      - Verständnis Mittel Prozentual
+      - Fun Mittel Prozentual
 
   studentenxtermine_table:
     id: tblN8cWYWl7Jhzag7
@@ -99,9 +99,9 @@ test_ws2122_base:
       - Uni-Module
       - Studenten x Termine
       - Uni
-      - Aufmerksamkeit Mittel Prozentual
-      - Verständnis Mittel Prozentual
-      - Fun Mittel Prozentual
+      - Aufmerksamkeit Mittel Ges.
+      - Verständnis Mittel Ges.
+      - Fun Mittel Ges.
       - Anwesenheitsquote
     to_clean:
       - MiB-Kurse
@@ -168,9 +168,9 @@ plots:
       - Art des Termins
       - Anwesenheit Rollup (from Studenten x Termine)
       - Studentenanzahl (from Studenten x Termine)
-      - Aufmerksamkeit Mittel
-      - Verständnis Mittel
-      - Fun Mittel
+      - Aufmerksamkeit Mittel Prozentual
+      - Verständnis Mittel Prozentual
+      - Fun Mittel Prozentual
       - Datum-df
 
 # --- Dashboard Setup ------------------------------------------------------------------------------------
