@@ -83,7 +83,6 @@ def list_airtable_records(base, table, cfg):
         for cat in table_dict['to_clean']:
             df[cat] = df[cat].str[0]
         for cat in table_dict['clean_nan']:
-            streamlit.dataframe(df[cat])
             df[cat] = df[cat]#.astype('float64')
     elif table_name == "PK Ergebnisse":
         for cat in table_dict['to_clean']:
@@ -135,6 +134,7 @@ def min_max_dates(df):
     dates = df.unique()
     dates = pandas.to_datetime(dates, format='%d/%m/%y').sort_values()
     dates = dates.strftime('%d/%m/%y')
+    streamlit.dataframe(df)
     min_date = dates[0]
     max_date = dates[-1]
     min_date = datetime.strptime(min_date, '%d/%m/%y')
