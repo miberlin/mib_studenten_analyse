@@ -83,7 +83,7 @@ def list_airtable_records(base, table, cfg):
         for cat in table_dict['to_clean']:
             df[cat] = df[cat].str[0]
         for cat in table_dict['clean_nan']:
-            df[cat] = df[cat]#.astype('float64')
+            df[cat] = df[cat].astype('float64')
     elif table_name == "PK Ergebnisse":
         for cat in table_dict['to_clean']:
             df[cat] = df[cat].str[0]
