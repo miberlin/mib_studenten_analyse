@@ -168,9 +168,9 @@ plots:
       - Art des Termins
       - Anwesenheit Rollup (from Studenten x Termine)
       - Studentenanzahl (from Studenten x Termine)
-      - Aufmerksamkeit Mittel Prozentual
-      - Verständnis Mittel Prozentual
-      - Fun Mittel Prozentual
+#      - Aufmerksamkeit Mittel Prozentual
+#      - Verständnis Mittel Prozentual
+#      - Fun Mittel Prozentual
       - Datum-df
 
 # --- Dashboard Setup ------------------------------------------------------------------------------------
