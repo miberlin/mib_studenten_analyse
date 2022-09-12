@@ -13,7 +13,7 @@ from datetime import datetime
 AIRTABLE_API_KEY = streamlit.secrets['AIRTABLE_API_KEY']
 
 
-@streamlit.cache
+#@streamlit.cache
 def read_config(filename):
     with open(filename) as f:
         yaml = YAML(typ='safe')
@@ -83,6 +83,7 @@ def list_airtable_records(base, table, cfg):
         for cat in table_dict['to_clean']:
             df[cat] = df[cat].str[0]
         for cat in table_dict['clean_nan']:
+            streamlit.dataframe(df[cat])
             df[cat] = df[cat].astype('float64')
     elif table_name == "PK Ergebnisse":
         for cat in table_dict['to_clean']:
@@ -92,7 +93,7 @@ def list_airtable_records(base, table, cfg):
     return df
 
 
-@streamlit.cache
+#@streamlit.cache
 def generate_dataframes(cfg):
     df_studenten = list_airtable_records('test_ws2122_base', 'studenten_table', cfg)
     df_studentenxtermine = list_airtable_records('test_ws2122_base', 'studentenxtermine_table', cfg)
@@ -119,7 +120,7 @@ def generate_dataframes(cfg):
 # Data visualization
 
 # Student plots
-@streamlit.cache # Interpolations
+#@streamlit.cache # Interpolations
 def interpolation_values(number_of_values, series):
     x = np.linspace(0, number_of_values - 1, num=len(series.dropna()))
     y = series.dropna()
@@ -129,7 +130,7 @@ def interpolation_values(number_of_values, series):
     return xnew, ynew
 
 
-@streamlit.cache
+#@streamlit.cache
 def min_max_dates(df):
     dates = df.unique()
     dates = pandas.to_datetime(dates, format='%d/%m/%y').sort_values()
@@ -141,7 +142,7 @@ def min_max_dates(df):
     return min_date , max_date
 
 
-@streamlit.cache
+#@streamlit.cache
 def missing_values_plot(df):
     fill1 = df.ffill()
     fill1.fillna(method='bfill')
@@ -153,7 +154,7 @@ def missing_values_plot(df):
 
 # For dates: Dates always have to be imported sorted.
 # Merge different courses
-@streamlit.cache
+#@streamlit.cache
 def student_plot_data_options(df, df_pk, cfg, student_id, start_date, end_date):
     # Student data
     student_data = df[cfg['plots']['students']['fields']]
