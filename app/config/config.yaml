@@ -50,7 +50,7 @@ test_ws2122_base:
       - MiB-Kurse
       - MiB-Kurs-Name
       - Studenten x Termine
-      - Anwesenheit Rollup (from Studenten x Termine)
+      - Anwesenheit (from Studenten x Termine)
       - Studentenanzahl (from Studenten x Termine)
       - Aufmerksamkeit Mittel
       - Verständnis Mittel
@@ -166,11 +166,11 @@ plots:
     fields:
       - MiB-Kurs-Name
       - Art des Termins
-      - Anwesenheit Rollup (from Studenten x Termine)
+      - Anwesenheit (from Studenten x Termine)
       - Studentenanzahl (from Studenten x Termine)
-#      - Aufmerksamkeit Mittel Prozentual
-#      - Verständnis Mittel Prozentual
-#      - Fun Mittel Prozentual
+      - Aufmerksamkeit Mittel Prozentual
+      - Verständnis Mittel Prozentual
+      - Fun Mittel Prozentual
       - Datum-df
 
 # --- Dashboard Setup ------------------------------------------------------------------------------------
