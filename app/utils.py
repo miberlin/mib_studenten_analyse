@@ -138,7 +138,7 @@ def min_max_dates(df):
     max_date = dates[-1]
     min_date = datetime.strptime(min_date, '%d/%m/%y')
     max_date = datetime.strptime(max_date, '%d/%m/%y')
-    return min_date , max_date
+    return min_date, max_date
 
 
 #@streamlit.cache
