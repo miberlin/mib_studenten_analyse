@@ -60,37 +60,37 @@ def list_airtable_records(base, table, cfg):
             print(counter, e)
 
     df1 = pandas.DataFrame.from_dict(result)
-    streamlit.write(df1.shape)
-    df1 = df1.set_index('id')
-    df = pandas.concat([df1.drop(['fields'], axis=1), df1['fields'].apply(pandas.Series)], axis=1)
-    if table_name == "Studenten Allgemein":
-        df = df.set_index('MiB-ID')
-        # Array to string
-        # which_array_to_str = ["MiB-Kurse", "Uni-Module", "Studenten x Termine"]
-        # for cat in which_array_to_str:
-        #     df[cat] = df[cat].str[0]
-    elif table_name == "Studenten":
-        df = df.set_index('MiB-ID')
-        for cat in table_dict['to_clean']:
-            df[cat] = df[cat].str[0]
-    elif table_name == "Studenten x Termine":
-        for cat in table_dict['to_clean']:
-            df[cat] = df[cat].str[0]
-        # Fill nan with False
-        for cat in table_dict['fill_nan']:
-            df[cat] = df[cat].fillna(value=False)
-    elif table_name == "Termine":
-        # Array to string
-        for cat in table_dict['to_clean']:
-            df[cat] = df[cat].str[0]
-        for cat in table_dict['clean_nan']:
-            df[cat] = df[cat].astype('float64')
-    elif table_name == "PK Ergebnisse":
-        for cat in table_dict['to_clean']:
-            df[cat] = df[cat].str[0]
+    if df1.shape is not (0,0):
+        df1 = df1.set_index('id')
+        df = pandas.concat([df1.drop(['fields'], axis=1), df1['fields'].apply(pandas.Series)], axis=1)
+        if table_name == "Studenten Allgemein":
+            df = df.set_index('MiB-ID')
+            # Array to string
+            # which_array_to_str = ["MiB-Kurse", "Uni-Module", "Studenten x Termine"]
+            # for cat in which_array_to_str:
+            #     df[cat] = df[cat].str[0]
+        elif table_name == "Studenten":
+            df = df.set_index('MiB-ID')
+            for cat in table_dict['to_clean']:
+                df[cat] = df[cat].str[0]
+        elif table_name == "Studenten x Termine":
+            for cat in table_dict['to_clean']:
+                df[cat] = df[cat].str[0]
+            # Fill nan with False
+            for cat in table_dict['fill_nan']:
+                df[cat] = df[cat].fillna(value=False)
+        elif table_name == "Termine":
+            # Array to string
+            for cat in table_dict['to_clean']:
+                df[cat] = df[cat].str[0]
+            for cat in table_dict['clean_nan']:
+                df[cat] = df[cat].astype('float64')
+        elif table_name == "PK Ergebnisse":
+            for cat in table_dict['to_clean']:
+                df[cat] = df[cat].str[0]
 
-    df = df[fields]  # Reduce db
-    return df
+        df = df[fields]  # Reduce db
+        return df
 
 
 #@streamlit.cache
