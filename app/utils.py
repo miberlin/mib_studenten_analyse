@@ -160,9 +160,12 @@ def student_plot_data_options(df, df_pk, cfg, student_id, start_date, end_date):
     student_data = df[cfg['plots']['students']['fields']]
 
     # Student data for exam results
-    pk_results_data = df_pk[cfg['plots']['students']['pk_results']]
+    try:
+        pk_results_data = df_pk[cfg['plots']['students']['pk_results']]
+        all_data = pandas.concat([student_data, pk_results_data])
+    except:
+        all_data = student_data
 
-    all_data = pandas.concat([student_data, pk_results_data])
     all_data['Art des Termin'] = all_data['Art des Termin'].fillna('PK')
     values_name = all_data[all_data['MiB-ID'] == student_id]
     values_name['Datum-df'] = pandas.to_datetime(values_name['Datum-df'], format='%d/%m/%y')

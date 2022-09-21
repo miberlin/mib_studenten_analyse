@@ -36,7 +36,7 @@ def main():
     with col_date_2:
         end_date = streamlit.date_input('Enddatum', min_value=min_date_kurs,
                                         max_value=max_date_kurs, value=max_date_kurs)
-
+    
     plot_student_data(df_studentenxtermine,df_pk_stud, cfg, mib_id, start_date, end_date)
 
 
