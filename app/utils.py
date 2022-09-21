@@ -165,6 +165,7 @@ def student_plot_data_options(df, df_pk, cfg, student_id, start_date, end_date):
         all_data = pandas.concat([student_data, pk_results_data])
     except:
         all_data = student_data
+        pk_empty = 1
 
     all_data['Art des Termin'] = all_data['Art des Termin'].fillna('PK')
     values_name = all_data[all_data['MiB-ID'] == student_id]
@@ -191,10 +192,15 @@ def student_plot_data_options(df, df_pk, cfg, student_id, start_date, end_date):
     nicht_dabei_idx = numpy.argwhere(nicht_dabei_idx == 0).flatten()
     height = 100 * numpy.ones(len(nicht_dabei_idx))
 
-    pk_idx = numpy.array(values_name['Art des Termin'])
-    pk_idx = numpy.argwhere(pk_idx == 'PK').flatten()
-    pk_actual_points = values_name['Erreicht Prozentual'].dropna() * 100
-    pk_guessed_points = values_name['Geschätzt Prozentual'].dropna() * 100
+    if pk_empty is not 1:
+        pk_idx = numpy.array(values_name['Art des Termin'])
+        pk_idx = numpy.argwhere(pk_idx == 'PK').flatten()
+        pk_actual_points = values_name['Erreicht Prozentual'].dropna() * 100
+        pk_guessed_points = values_name['Geschätzt Prozentual'].dropna() * 100
+    else:
+        pk_idx = None
+        pk_actual_points = None
+        pk_guessed_points = None
 
     return number_of_values, values_range, aufm, vers, fun, date, late_arrival, nicht_dabei_idx, height, pk_idx, pk_actual_points, pk_guessed_points
 
@@ -218,7 +224,10 @@ def plot_student_data(df, df_pk, cfg, student_id, start_date, end_date):
     # Line selection using checkboxes
     with col1:
         aufm_checkbox = streamlit.checkbox('Aufmerksamkeit', value=True)
-        exams_checkbox = streamlit.checkbox('PK Ergebnisse', value=True)
+        if pk_idx is not None:
+            exams_checkbox = streamlit.checkbox('PK Ergebnisse', value=True)
+        else:
+            exams_checkbox = False
     with col2:
         vers_checkbox = streamlit.checkbox('Verständnis', value=True)
         absent_checkbox = streamlit.checkbox('Anwesenheit', value=True)
