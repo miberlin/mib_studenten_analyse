@@ -60,6 +60,7 @@ def list_airtable_records(base, table, cfg):
             print(counter, e)
 
     df1 = pandas.DataFrame.from_dict(result)
+    streamlit.write(df1.shape)
     df1 = df1.set_index('id')
     df = pandas.concat([df1.drop(['fields'], axis=1), df1['fields'].apply(pandas.Series)], axis=1)
     if table_name == "Studenten Allgemein":
